@@ -6,7 +6,7 @@
 /*   By: brmaria- <brmaria-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:33:55 by brmaria-          #+#    #+#             */
-/*   Updated: 2025/05/08 09:41:35 by brmaria-         ###   ########.fr       */
+/*   Updated: 2025/05/08 17:33:45 by brmaria-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ ft_check (char format, va_list args, int *count)
 
 ft_validate(char format)
 {
-    char    check;
+    char    *check;
     int     i;
     
     check = "cspdiuxX%";
@@ -56,7 +56,7 @@ int ft_printf(const char *format, ...)
         if(format[i] == '%' && ft_validate(format[i + 1]))
         {
             i++;
-            ft_printchar(ft_check(format[i], args, &count););
+            ft_printchar(ft_check(format[i], args, &count), &count);
         }
         else
             ft_printchar(format[i], &count);
@@ -69,9 +69,9 @@ int ft_printf(const char *format, ...)
 int main()
 {
     int a;
-    int b;
-    a =    printf("Meu char: %c\n", 't');
-    b = ft_printf("Meu char: %c\n", 't');
+    //int b;
+    a =    printf("Meu char: %c %d\n", 3, 't');
+   // b = ft_printf("Meu char: %c\n", 't');
 
-    printf("%d %d\n", a, b);
+    printf("%d \n", a);
 }*/
