@@ -6,17 +6,39 @@
 /*   By: brmaria- <brmaria-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:33:55 by brmaria-          #+#    #+#             */
-/*   Updated: 2025/05/09 18:11:18 by brmaria-         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:59:57 by brmaria-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
 int    ft_putchar(char c)
 {
     write(1, &c, 1);
     return (1);
+}
+
+int ft_puthex(unsigned long int n, int cas)
+{
+    char    *base;
+    int     i;
+
+    i = 0;
+    if (cas)
+        base = "0123456789ABCDEF";
+    else
+        base = "0123456789abcdef";
+    if (n > 15)
+        i = i + ft_puthex((n / 16), cas);
+    i = i + ft_putchar(base[n % 16]);
+    return (i);
+}
+
+int ft_putptr(void *s)
+{
+    if (!s)
+        return (ft_putstr("(nil)"));
+    return (ft_putstr("0x") + ft_puthex((unsigned long)s, 0));
 }
 
 int	ft_putnbr(long int n)
@@ -50,47 +72,29 @@ int	ft_putstr(char *s)
     return (i);
 }
 
-static int  ft_check(char format, va_list args, int *count)
+static int  ft_check(char format, va_list args)
 {  
     if (format == '%')
        return (ft_putchar('%'));
     else if (format == 'd' || format == 's')
-    {
-        *count++;
         return (ft_putnbr(va_arg(args, int)));
-    }
     else if(format == 'u')
-    {
-        *count++;
         return (ft_putnbr(va_arg(args, unsigned int)));
-    }
     else if(format == 'x')
-    {
-        *count++;
         return (ft_puthex(va_arg(args, unsigned int), 0));
-    }
     else if(format == 'X')
-    {
-        *count++;
         return (ft_puthex(va_arg(args, unsigned int), 1));
-    } 
     else if (format == 's')
-    {
-        *count++;
         return (ft_putstr(va_arg(args, char *)));
-    }
     else if (format == 'c')
         return (ft_putchar(va_arg(args, char)));
     else if(format == 'p')
-    {
-        count++;
         return (ft_putptr(va_arg(args, void *)));
-    }
     else
         return (0);
 }
 
-ft_validate(char format)
+int ft_validate(char format)
 {
     char    *check;
     int     i;
@@ -121,11 +125,11 @@ int ft_printf(const char *format, ...)
     {
         if(format[i] == '%' && ft_validate(format[i + 1]))
         {
-            i++;
-            ft_check(format[i], args, &count);
+            i++; 
+            count = count + ft_check(format[i], args);
         }
         else
-            ft_printchar(format[i], &count);
+            count = count + ft_putchar(format[i]);
         i++;
     }
     va_end(args);
