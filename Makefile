@@ -6,7 +6,7 @@
 #    By: brmaria- <brmaria-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 18:10:31 by brmaria-          #+#    #+#              #
-#    Updated: 2025/05/10 19:25:02 by brmaria-         ###   ########.fr        #
+#    Updated: 2025/05/13 12:22:25 by brmaria-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
-	$(RM) $(OBJ) $(OBJB)
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
