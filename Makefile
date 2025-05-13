@@ -6,7 +6,7 @@
 #    By: brmaria- <brmaria-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 18:10:31 by brmaria-          #+#    #+#              #
-#    Updated: 2025/05/10 12:02:07 by brmaria-         ###   ########.fr        #
+#    Updated: 2025/05/10 19:25:02 by brmaria-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC =	ft_printf.c
-
-
+SRC =	ft_printf.c \
+		ft_printfunc.c
+		
 OBJ = $(SRC:.c=.o)
 
 RM = rm -rf
